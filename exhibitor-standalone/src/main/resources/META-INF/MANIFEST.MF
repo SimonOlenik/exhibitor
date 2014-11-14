@@ -1,0 +1,1 @@
+Main-Class: com.netflix.exhibitor.application.ExhibitorMain

@@ -100,6 +100,12 @@
             <div id="tabs-explorer" class="ui-helper-hidden">
                 <div id="tree"></div>
 
+                <div id="explorer-buttons" class="ui-helper-hidden" style="margin-top: 10px;">
+                    <button id="explorer-button-modify">Modify...</button>
+                    <button id="explorer-button-analyze">Analyze...</button>
+                    <button id="explorer-button-usage-listing">Usage Listing...</button>
+                </div>
+
                 <div class="info">
                     <table>
                         <tr valign="top">
@@ -108,20 +114,17 @@
                         <tr valign="top">
                             <td nowrap><strong>Stat</strong></td> <td><span id="stat"></span></td>
                         </tr>
+                        <!--
                         <tr valign="top">
                             <td nowrap><strong>Data Bytes</strong></td> <td><span id="data-bytes"></span></td>
                         </tr>
+                        -->
                         <tr valign="top">
-                            <td nowrap><strong>Data as String</strong></td> <td><span id="data-str"></span></td>
+                            <td nowrap><strong>Data</strong></td> <td><span id="data-str"></span></td>
                         </tr>
                     </table>
                 </div>
 
-                <div id="explorer-buttons" class="ui-helper-hidden">
-                    <button id="explorer-button-modify">Modify...</button>
-                    <button id="explorer-button-analyze">Analyze...</button>
-                    <button id="explorer-button-usage-listing">Usage Listing...</button>
-                </div>
             </div>
 
             <div id="tabs-config" class="ui-helper-hidden">
@@ -348,18 +351,13 @@
                 <label for="node-name">Path </label><input type="text" id="node-name" name="node-name" size="40"><br clear="all"/>
             </div>
             <div id="node-data-container">
-                <label for="node-data">Data </label><textarea id="node-data" name="node-data" cols="45" rows="3"></textarea><select name="node-data-type" id="node-data-type">
-                <option value="string">String</option>
-                <option value="binary">Binary</option>
-            </select><br clear="all"/>
+                <select name="node-data-type" id="node-data-type">
+                    <option value="string">string</option>
+                    <option value="binary">binary</option>
+                </select>
+                <label for="node-data">Data </label><textarea id="node-data" name="node-data" style="width: 100%; height: 90%"></textarea>
+                <br clear="all"/>
             </div>
-
-            <fieldset>
-                <legend>Tracking</legend>
-                <label for="node-data-user">Username</label><input type="text" id="node-data-user" name="node-data-user" size="20" title="Your username"><br clear="all"/>
-                <label for="node-data-ticket">Ticket/Code</label><input type="text" id="node-data-ticket" name="node-data-ticket" size="20" title="Ticket/tag number for this operation"><br clear="all"/>
-                <label for="node-data-reason">Reason</label><input type="text" id="node-data-reason" name="node-data-reason" size="40" title="Reason for the change"><br clear="all"/>
-            </fieldset>
         </div>
 
         <div id="analyze-dialog" class="ui-helper-hidden">

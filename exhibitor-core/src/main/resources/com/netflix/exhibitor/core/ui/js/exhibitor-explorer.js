@@ -174,7 +174,8 @@ function initExplorer()
         }
         else
         {
-            localDataType = "binary";
+            localData = fromBinary(localData);
+            localDataType = "string";
         }
 
         openModifyDialog("update", explorerSelectedPath, localData, localDataType);

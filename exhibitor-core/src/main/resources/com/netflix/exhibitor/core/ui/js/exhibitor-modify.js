@@ -1,4 +1,4 @@
-function completeModifyDialog(localPath, isUpdate, userName, ticketNumber, reason)
+function completeModifyDialog(localPath, isUpdate)
 {
     var method = isUpdate ? "PUT" : "DELETE";
     var data = $('#node-data').val().trim();
@@ -13,16 +13,13 @@ function completeModifyDialog(localPath, isUpdate, userName, ticketNumber, reaso
         cache: false,
         data: data,
         contentType: 'application/json',
-        headers: {
-            'netflix-user-name': userName,
-            'netflix-ticket-number': ticketNumber,
-            'netflix-reason': reason
-        },
         success:function(data)
         {
             if ( data.succeeded )
             {
-                $("#tree").dynatree("getTree").reload();
+                if (method == "DELETE") {
+                    $("#tree").dynatree("getTree").reload();
+                }
                 messageDialog("Success", "The change has been made.");
             }
             else
@@ -43,14 +40,6 @@ function continueModifyDialog()
     }
 
     var isUpdate = ($('#node-action').val() === "update");
-    var userName = $('#node-data-user').val().trim();
-    var ticketNumber = $('#node-data-ticket').val().trim();
-    var reason = $('#node-data-reason').val().trim();
-    if ( (userName.length == 0) || (ticketNumber.length == 0) || (reason.length == 0) )
-    {
-        messageDialog("Error", "The tracking fields are required.");
-        return;
-    }
 
     $('#validate-modify-node-action').html(isUpdate ? "Create/update\n" : "Delete\n");
     $('#validate-modify-node-description').html(localPath);
@@ -62,7 +51,7 @@ function continueModifyDialog()
 
             "OK": function(){
                 $(this).dialog("close");
-                completeModifyDialog(localPath, isUpdate, userName, ticketNumber, reason);
+                completeModifyDialog(localPath, isUpdate);
             }
         }
     );
@@ -147,7 +136,8 @@ function initModifyUi()
     $("#get-node-data-dialog").dialog({
         modal: true,
         autoOpen: false,
-        width: 525,
+        width: '80%',
+        height: 800,
         resizable: false,
         title: 'Modify Node'
     });

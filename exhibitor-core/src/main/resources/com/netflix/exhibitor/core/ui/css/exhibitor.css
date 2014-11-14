@@ -589,3 +589,10 @@ fieldset
     left: 100%;
     line-height: 125%;
 }
+
+#data-str {
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+}
