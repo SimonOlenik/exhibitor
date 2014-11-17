@@ -1,17 +1,17 @@
 function completeModifyDialog(localPath, isUpdate)
 {
     var method = isUpdate ? "PUT" : "DELETE";
-    var data = $('#node-data').val().trim();
+    var zkData = $('#node-data').val().trim();
     if ( $('#node-data-type').val() === 'string' )
     {
-        data = toBinary(data);
+        zkData = toBinary(zkData);
     }
 
     $.ajax({
         type: method,
         url: URL_EXPLORER_ZNODE_BASE + localPath,
         cache: false,
-        data: data,
+        data: zkData,
         contentType: 'application/json',
         success:function(data)
         {
@@ -19,6 +19,9 @@ function completeModifyDialog(localPath, isUpdate)
             {
                 if (method == "DELETE") {
                     $("#tree").dynatree("getTree").reload();
+                } else {
+                    $("#data-str").text(fromBinary(zkData));
+                    explorerSelectedBytes = zkData;
                 }
                 messageDialog("Success", "The change has been made.");
             }
