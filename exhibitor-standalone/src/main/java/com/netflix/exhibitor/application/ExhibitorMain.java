@@ -202,7 +202,7 @@ public class ExhibitorMain implements Closeable
         }
     }
 
-    private static void setShutdown(final ExhibitorMain exhibitorMain)
+    static void setShutdown(final ExhibitorMain exhibitorMain)
     {
         Runtime.getRuntime().addShutdownHook
         (
