@@ -151,6 +151,7 @@ public class ExplorerResource
             if ( !context.getExhibitor().nodeMutationsAllowed() )
             {
                 response = Response.status(Response.Status.FORBIDDEN).build();
+                context.getExhibitor().getLog().add(ActivityLog.Type.INFO, String.format("No node mutations allowed. Will not create/update node [%s]", path));
                 break;
             }
 
@@ -168,6 +169,11 @@ public class ExplorerResource
                 try
                 {
                     context.getExhibitor().getLocalConnection().setData().forPath(path, data);
+                    try {
+                        context.getExhibitor().getLog().add(ActivityLog.Type.INFO, String.format("Node [%s] data before update [%s]", path, getNodeData(path)));
+                    } catch (Exception e) {
+                        context.getExhibitor().getLog().add(ActivityLog.Type.INFO, String.format("Could not obtain data from node [%s] before update due to error: %s", path, e.getMessage()));
+                    }
                     context.getExhibitor().getLog().add(ActivityLog.Type.INFO, String.format("createNode() updated node [%s] to data [%s]", path, binaryDataStr));
                 }
                 catch ( KeeperException.NoNodeException dummy )
@@ -179,6 +185,7 @@ public class ExplorerResource
             catch ( Exception e )
             {
                 response = Response.ok(new Result(e)).build();
+                context.getExhibitor().getLog().add(ActivityLog.Type.INFO, String.format("Could not create/update node [%s] due to error: %s", path, e.getMessage()));
                 break;
             }
 
@@ -191,7 +198,7 @@ public class ExplorerResource
     @GET
     @Path("node-data")
     @Produces("application/json")
-    public String   getNodeData(@QueryParam("key") String key) throws Exception
+    public String getNodeData(@QueryParam("key") String key) throws Exception
     {
         ObjectNode node = JsonNodeFactory.instance.objectNode();
         try
