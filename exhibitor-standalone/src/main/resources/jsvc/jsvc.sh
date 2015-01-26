@@ -10,18 +10,23 @@
 ### END INIT INFO
 
 # Setup variables
-BASE_DIR="/home/dev/exhibitor"
-COMMON_DIR="/home/dev/exhibitor"
+sudo su
+BASE_DIR="/home/simon/job/research/exhibitor/exhibitor-standalone/target"
+COMMON_DIR="/home/simon/job/research/exhibitor/exhibitor-standalone/target"
 EXEC="/usr/bin/jsvc"
 JAVA_HOME="$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")"
 JAVA_OPTS=""
 COMPONENT_NAME="exhibitor-standalone-1.5.3-SNAPSHOT-jar-with-dependencies"
-COMPONENT_PARAMS="--configtype zookeeper --zkconfigconnect localhost:2181 --zkconfigzpath /exhibitor"
+COMPONENT_PARAMS="-c file --port $PORT --hostname $IP_ADDRESS"
+
+IP_ADDRESS="$(hostname -I)"
+#IP_ADDRESS="your ip"
+PORT=8888
 
 CLASS_PATH="$COMMON_DIR/conf:$BASE_DIR/conf:$COMMON_DIR/lib/*:$BASE_DIR/$COMPONENT_NAME.jar"
 CLASS="com.netflix.exhibitor.application.DaemonMain"
 
-USER="dev"
+USER="root"
 PID="$BASE_DIR/pid/server.pid"
 LOG_OUT="$COMMON_DIR/log/exhibitor-server.out"
 LOG_ERR="$COMMON_DIR/log/exhibitor-server.err"

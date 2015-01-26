@@ -23,6 +23,7 @@ var URL_EXPLORER_NODE_DATA = "../explorer/node-data";
 var URL_EXPLORER_NODE = "../explorer/node";
 var URL_EXPLORER_ZNODE_BASE = "../explorer/znode";
 var URL_EXPLORER_ANALYZE = "../explorer/analyze";
+var URL_EXPLORER_UPLOAD_FILE="../explorer/uploadFile";
 
 var URL_GET_STATE = "../config/get-state";
 var URL_SET_CONFIG = "../config/set";

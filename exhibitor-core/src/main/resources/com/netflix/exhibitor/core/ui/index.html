@@ -104,6 +104,7 @@
                     <button id="explorer-button-modify">Modify...</button>
                     <button id="explorer-button-analyze">Analyze...</button>
                     <button id="explorer-button-usage-listing">Usage Listing...</button>
+                    <button id="explorer-button-upload-properties">Upload properties file...</button>
                 </div>
 
                 <div class="info">
@@ -398,6 +399,16 @@
             <div id="usage-listing-help">
                 Enter a starting path for the listing and the maximum size path for traversal (i.e. paths with Max Traversal children will not be recursively listed). A detailed listing
                 will be generated showing all the paths, their creation time, their immediate children count and their deep children count.
+            </div>
+        </div>
+
+        <div id="get-properties-dialog" class="ui-helper-hidden">
+            <div>
+                <label for="get-properties-path">Starting Path </label><input type="text" id="get-properties-path" name="get-properties-path" size="40" title="The starting path for the listing"><br clear="all"/><br/>
+                <label for="get-properties-file">File to upload </label><input type="file" id="get-properties-file" name="get-properties-file" size="40" title="File for upload"><br clear="all"/><br clear="all"/>
+            </div>
+            <div id="get-properties-help">
+                Choose file to upload. The exhibitor will automatically add Znodes according to starting path and .properties file.
             </div>
         </div>
 
